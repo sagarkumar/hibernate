@@ -2,6 +2,14 @@ package com.sagarpr;
 
 import java.util.Properties;
 
+import com.sagarpr.lifecycle.Computer;
+import com.sagarpr.manytomany.Actor;
+import com.sagarpr.manytomany.Movie;
+import com.sagarpr.onetomany.Department;
+import com.sagarpr.onetomany.Professor;
+import com.sagarpr.onetoone.Laptop;
+import com.sagarpr.onetoone.Student;
+import com.sagarpr.simplesave.Event;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -33,6 +41,13 @@ public class HibernateUtil {
                 configuration.setProperties(settings);
 
                 configuration.addAnnotatedClass(Event.class);
+                configuration.addAnnotatedClass(Student.class);
+                configuration.addAnnotatedClass(Laptop.class);
+                configuration.addAnnotatedClass(Professor.class);
+                configuration.addAnnotatedClass(Department.class);
+                configuration.addAnnotatedClass(Movie.class);
+                configuration.addAnnotatedClass(Actor.class);
+                configuration.addAnnotatedClass(Computer.class);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();

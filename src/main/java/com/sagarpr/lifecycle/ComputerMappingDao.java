@@ -1,32 +1,32 @@
-package com.sagarpr;
+package com.sagarpr.lifecycle;
 
+import com.sagarpr.HibernateUtil;
+import com.sagarpr.manytomany.Movie;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.List;
+public class ComputerMappingDao {
 
-public class EventDao {
-
-    public void saveStudent(Event event) {
+    public void saveComputer(Computer computer){
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start a transaction
             transaction = session.beginTransaction();
             // save the student object
-            session.save(event);
+            session.save(computer);
+
+            computer.setComputerPrice("500");
+
             // commit transaction
             transaction.commit();
+
+           // session.detach(computer);
+            computer.setComputerPrice("900");
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
             e.printStackTrace();
-        }
-    }
-
-    public List< Event > getStudents() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from Event", Event.class).list();
         }
     }
 }

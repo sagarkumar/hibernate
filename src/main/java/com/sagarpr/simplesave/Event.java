@@ -1,4 +1,4 @@
-package com.sagarpr;
+package com.sagarpr.simplesave;
 
 import jakarta.persistence.*;
 
@@ -6,11 +6,14 @@ import jakarta.persistence.*;
 @Table(name = "event")
 public class Event {
 
+    @Column(name = "event_name")
     private String eventName;
     private String eventLocation;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private Organizer organizer;
 
     public void setId(Long id) {
         this.id = id;
@@ -34,6 +37,14 @@ public class Event {
 
     public void setEventLocation(String eventLocation) {
         this.eventLocation = eventLocation;
+    }
+
+    public Organizer getOrganizer() {
+        return organizer;
+    }
+
+    public void setOrganizer(Organizer organizer) {
+        this.organizer = organizer;
     }
 
     @Override
